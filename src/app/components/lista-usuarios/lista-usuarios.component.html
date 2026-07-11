@@ -1,1 +1,9 @@
-<p>lista-usuarios works!</p>
+
+<h2>Lista de usuarios</h2>
+
+@for (usuario of filtroUsuarios(); track $index) {
+    <app-usuario-card [usuario]="usuario"></app-usuario-card>
+}
+@empty{
+    <p>No hay usuarios</p>
+}

@@ -1,1 +1,110 @@
-<p>usuario-card works!</p>
+<mat-card class="usuario-card" appearance="outlined">
+
+    <mat-card-header>
+
+        <div mat-card-avatar>
+            <mat-icon>person</mat-icon>
+        </div>
+
+        <mat-card-title>
+            {{ usuario().name }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+            {{ usuario().username }}
+        </mat-card-subtitle>
+
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <h3>Información Personal</h3>
+
+        <p>
+            <strong>ID:</strong>
+            {{ usuario().id }}
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            {{ usuario().email }}
+        </p>
+
+        <p>
+            <strong>Teléfono:</strong>
+            {{ usuario().phone }}
+        </p>
+
+        <p>
+            <strong>Sitio Web:</strong>
+            {{ usuario().website }}
+        </p>
+
+        <mat-divider></mat-divider>
+
+        <h3>Dirección</h3>
+
+        <p>
+            <strong>Calle:</strong>
+            {{ usuario().address.street }}
+        </p>
+
+        <p>
+            <strong>Suite:</strong>
+            {{ usuario().address.suite }}
+        </p>
+
+        <p>
+            <strong>Ciudad:</strong>
+            {{ usuario().address.city }}
+        </p>
+
+        <p>
+            <strong>Código Postal:</strong>
+            {{ usuario().address.zipcode }}
+        </p>
+
+        <p>
+            <strong>Latitud:</strong>
+            {{ usuario().address.geo.lat }}
+        </p>
+
+        <p>
+            <strong>Longitud:</strong>
+            {{ usuario().address.geo.lng }}
+        </p>
+
+        <mat-divider></mat-divider>
+
+        <h3>Empresa</h3>
+
+        <p>
+            <strong>Nombre:</strong>
+            {{ usuario().company.name }}
+        </p>
+
+        <p>
+            <strong>Catch Phrase:</strong>
+            {{ usuario().company.catchPhrase }}
+        </p>
+
+        <p>
+            <strong>Business:</strong>
+            {{ usuario().company.bs }}
+        </p>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+
+        <button mat-raised-button color="primary">
+            Editar
+        </button>
+
+        <button mat-raised-button color="warn">
+            Eliminar
+        </button>
+
+    </mat-card-actions>
+
+</mat-card>
