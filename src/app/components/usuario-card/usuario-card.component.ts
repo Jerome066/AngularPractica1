@@ -27,7 +27,7 @@ export class UsuarioCardComponent {
     this.eliminar.emit(this.usuario().id);
   }
 
-  editarUsuario(): void {
+  actualizarUsuario(): void {
     this.editar.emit(this.usuario());
   }
 

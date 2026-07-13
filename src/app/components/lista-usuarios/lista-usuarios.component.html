@@ -1,9 +1,29 @@
+@if (mostrarFormulario()) {
+<app-formulario-usuario [usuarioEditar]="usuarioSeleccionado()" (guardar)="agregarUsuario()"></app-formulario-usuario>
+
+}
 
 <h2>Lista de usuarios</h2>
 
-@for (usuario of filtroUsuarios(); track $index) {
-    <app-usuario-card [usuario]="usuario"></app-usuario-card>
-}
-@empty{
+<div class="barra-acciones">
+    <mat-form-field appearance="outline">
+
+        <mat-label>Buscar usuario</mat-label>
+        <input matInput #busqueda (input)="busquedaF.set(busqueda.value)" placeholder="Nombre o correo">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="agregarUsuario()">
+        <mat-icon>person_add</mat-icon>
+        Nuevo usuario
+    </button>
+</div>
+
+<div class="contenedor-tarjetas">
+    @for (usuario of filtroUsuarios(); track $index) {
+    <app-usuario-card [usuario]="usuario" (editar)="editarUsuario($event)"
+        (eliminar)="eliminarUsuario($event)"></app-usuario-card>
+    }
+    @empty{
     <p>No hay usuarios</p>
-}
+    }
+</div>

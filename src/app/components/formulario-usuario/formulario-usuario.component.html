@@ -1,1 +1,197 @@
-<p>formulario-usuario works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{ usuarioActual ? 'Editar Usuario' : 'Nuevo Usuario' }}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form [formGroup]="formulario" (ngSubmit)="guardarUsuario()">
+
+            <h2>Datos personales</h2>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+
+                @if (formulario.get('name')?.hasError('required') && formulario.get('name')?.touched) {
+                <mat-error>El nombre es obligatorio.</mat-error>
+                }
+
+                @if (formulario.get('name')?.hasError('minlength')) {
+                <mat-error>Debe contener al menos 3 caracteres.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="username">
+
+                @if (formulario.get('username')?.hasError('required') && formulario.get('username')?.touched) {
+                <mat-error>El usuario es obligatorio.</mat-error>
+                }
+
+                @if (formulario.get('username')?.hasError('minlength')) {
+                <mat-error>Debe contener al menos 3 caracteres.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" formControlName="email">
+
+                @if (formulario.get('email')?.hasError('required') && formulario.get('email')?.touched) {
+                <mat-error>El correo es obligatorio.</mat-error>
+                }
+
+                @if (formulario.get('email')?.hasError('email')) {
+                <mat-error>Correo electrónico no válido.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="phone">
+
+                @if (formulario.get('phone')?.hasError('required') && formulario.get('phone')?.touched) {
+                <mat-error>El teléfono es obligatorio.</mat-error>
+                }
+
+                @if (formulario.get('phone')?.hasError('pattern')) {
+                <mat-error>Debe contener exactamente 10 números.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Sitio web</mat-label>
+                <input matInput formControlName="website">
+
+                @if (formulario.get('website')?.hasError('required') && formulario.get('website')?.touched) {
+                <mat-error>El sitio web es obligatorio.</mat-error>
+                }
+
+                @if (formulario.get('website')?.hasError('pattern')) {
+                <mat-error>Ingrese una URL válida.</mat-error>
+                }
+            </mat-form-field>
+
+            <div formGroupName="address">
+
+                <h2>Dirección</h2>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Calle</mat-label>
+                    <input matInput formControlName="street">
+
+                    @if (formulario.get('address.street')?.hasError('required')) {
+                    <mat-error>La calle es obligatoria.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Suite</mat-label>
+                    <input matInput formControlName="suite">
+
+                    @if (formulario.get('address.suite')?.hasError('required')) {
+                    <mat-error>La suite es obligatoria.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Ciudad</mat-label>
+                    <input matInput formControlName="city">
+
+                    @if (formulario.get('address.city')?.hasError('required')) {
+                    <mat-error>La ciudad es obligatoria.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Código Postal</mat-label>
+                    <input matInput formControlName="zipcode">
+
+                    @if (formulario.get('address.zipcode')?.hasError('required')) {
+                    <mat-error>El código postal es obligatorio.</mat-error>
+                    }
+
+                    @if (formulario.get('address.zipcode')?.hasError('pattern')) {
+                    <mat-error>Debe contener exactamente 5 dígitos.</mat-error>
+                    }
+                </mat-form-field>
+
+                <div formGroupName="geo">
+
+                    <h3>Ubicación</h3>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Latitud</mat-label>
+                        <input matInput formControlName="lat">
+
+                        @if (formulario.get('address.geo.lat')?.hasError('required')) {
+                        <mat-error>La latitud es obligatoria.</mat-error>
+                        }
+
+                        @if (formulario.get('address.geo.lat')?.hasError('pattern')) {
+                        <mat-error>Debe ser un número válido.</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Longitud</mat-label>
+                        <input matInput formControlName="lng">
+
+                        @if (formulario.get('address.geo.lng')?.hasError('required')) {
+                        <mat-error>La longitud es obligatoria.</mat-error>
+                        }
+
+                        @if (formulario.get('address.geo.lng')?.hasError('pattern')) {
+                        <mat-error>Debe ser un número válido.</mat-error>
+                        }
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div formGroupName="company">
+
+                <h2>Empresa</h2>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name">
+
+                    @if (formulario.get('company.name')?.hasError('required')) {
+                    <mat-error>El nombre de la empresa es obligatorio.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Eslogan</mat-label>
+                    <input matInput formControlName="catchPhrase">
+
+                    @if (formulario.get('company.catchPhrase')?.hasError('required')) {
+                    <mat-error>El eslogan es obligatorio.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Actividad</mat-label>
+                    <input matInput formControlName="bs">
+
+                    @if (formulario.get('company.bs')?.hasError('required')) {
+                    <mat-error>La actividad es obligatoria.</mat-error>
+                    }
+                </mat-form-field>
+
+            </div>
+
+            <button mat-raised-button color="primary" type="submit">
+                {{ usuarioActual ? 'Actualizar Usuario' : 'Guardar Usuario' }}
+            </button>
+
+        </form>
+
+    </mat-card-content>
+</mat-card>

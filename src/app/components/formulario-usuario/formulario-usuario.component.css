@@ -1,0 +1,58 @@
+:host {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1000;
+}
+
+/* Ventana */
+mat-card {
+    width: 900px;
+    max-width: 95vw;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.30),
+        0 0 0 1px rgba(255,255,255,.08);
+
+    padding: 20px;
+}
+
+/* Formulario */
+form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+mat-form-field{
+    width:100%;
+}
+
+/* Secciones */
+
+div[formGroupName="address"],
+div[formGroupName="company"],
+div[formGroupName="geo"]{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+h2,h3{
+    grid-column:1 / -1;
+    margin:0;
+}
+
+button{
+    align-self:flex-end;
+}
