@@ -5,7 +5,7 @@
 
 .usuario-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     margin: 0 auto;
     border-radius: 16px;
     transition: all .25s ease;
@@ -13,7 +13,7 @@
 }
 
 .usuario-card:hover {
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
     box-shadow: 0 10px 30px rgba(0,0,0,.18);
 }
 
