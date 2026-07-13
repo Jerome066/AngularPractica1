@@ -60,6 +60,7 @@ export class ListaUsuariosComponent implements OnInit{
 
   agregarUsuario(): void{
     this.usuarioSeleccionado.set(null);
+    this.mostrarFormulario.set(true);
   }
 
   actualizarUsuario(usuario: Usuario): void{
