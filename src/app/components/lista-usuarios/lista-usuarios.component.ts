@@ -53,12 +53,14 @@ export class ListaUsuariosComponent implements OnInit {
   fontStyleControl = new FormControl('');
   fontStyle?: string;
 
+  //Varaible para el orden alfabetico
+  ordenAlf = signal<true | false>(true);
 
   //Lista de usuarios filtrados con el texto de busqueda
   filtroUsuarios = computed(() => {
 
     var texto = this.busquedaF().toLowerCase();
-    return this.servicioUsuario.listaUsuarios().filter(usuario =>
+    var resultado = this.servicioUsuario.listaUsuarios().filter(usuario =>
       usuario.name.toLowerCase().includes(texto) ||
       usuario.email.toLowerCase().includes(texto) ||
       usuario.username.toLocaleLowerCase().includes(texto) ||
@@ -66,6 +68,16 @@ export class ListaUsuariosComponent implements OnInit {
       usuario.company.name.toLocaleLowerCase().includes(texto) ||
       usuario.website.toLocaleLowerCase().includes(texto)
     );
+    this.ordenAlf()?
+      resultado.sort((a, b) =>
+        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+      )
+      :
+      resultado.sort((a, b) =>
+        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+      );
+
+    return resultado;
   });
 
   ngOnInit(): void {
@@ -99,7 +111,11 @@ export class ListaUsuariosComponent implements OnInit {
 
   //Cambio de vista entre tarjetas y tabla
   cambiarVista(valor: 'card' | 'table') {
-  this.vista.set(valor);
+    this.vista.set(valor);
   }
 
+  // Cambiar orden alfabetico
+  cambiarOrdenAlf(){
+    this.ordenAlf.update(current => !current)
+  }
 }

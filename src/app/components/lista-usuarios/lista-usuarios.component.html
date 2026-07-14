@@ -6,6 +6,9 @@
 <h2>Lista de usuarios</h2>
 
 <div class="barra-acciones">
+    <button mat-mini-fab aria-label="Example icon button with a menu icon" (click)="cambiarOrdenAlf()">
+        <mat-icon>sort_by_alpha</mat-icon>
+    </button>
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="vista()"
         (change)="cambiarVista($event.value)">
         <mat-button-toggle value="card"><mat-icon>view_comfy</mat-icon></mat-button-toggle>
@@ -22,6 +25,7 @@
         Nuevo usuario
     </button>
 </div>
+
 @if (vista() === 'card') {
 <div class="contenedor-tarjetas">
     @for (usuario of filtroUsuarios(); track $index) {
