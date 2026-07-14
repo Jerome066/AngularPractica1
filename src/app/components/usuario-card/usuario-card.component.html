@@ -17,30 +17,32 @@
     </mat-card-header>
 
     <mat-card-content>
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h3>Información Personal</h3>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                <strong>ID:</strong>
+                {{ usuario().id }}
+            </p>
 
-        <h3>Información Personal</h3>
+            <p>
+                <strong>Email:</strong>
+                {{ usuario().email }}
+            </p>
 
-        <p>
-            <strong>ID:</strong>
-            {{ usuario().id }}
-        </p>
+            <p>
+                <strong>Teléfono:</strong>
+                {{ usuario().phone }}
+            </p>
 
-        <p>
-            <strong>Email:</strong>
-            {{ usuario().email }}
-        </p>
-
-        <p>
-            <strong>Teléfono:</strong>
-            {{ usuario().phone }}
-        </p>
-
-        <p>
-            <strong>Sitio Web:</strong>
-            {{ usuario().website }}
-        </p>
-
-        <mat-divider></mat-divider>
+            <p>
+                <strong>Sitio Web:</strong>
+                {{ usuario().website }}
+            </p>
+        </mat-expansion-panel>
 
         <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
             <mat-expansion-panel-header>
