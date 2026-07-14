@@ -57,10 +57,14 @@ export class ListaUsuariosComponent implements OnInit {
   //Lista de usuarios filtrados con el texto de busqueda
   filtroUsuarios = computed(() => {
 
-    const texto = this.busquedaF().toLowerCase();
+    var texto = this.busquedaF().toLowerCase();
     return this.servicioUsuario.listaUsuarios().filter(usuario =>
       usuario.name.toLowerCase().includes(texto) ||
-      usuario.email.toLowerCase().includes(texto)
+      usuario.email.toLowerCase().includes(texto) ||
+      usuario.username.toLocaleLowerCase().includes(texto) ||
+      usuario.address.city.toLocaleLowerCase().includes(texto) ||
+      usuario.company.name.toLocaleLowerCase().includes(texto) ||
+      usuario.website.toLocaleLowerCase().includes(texto)
     );
   });
 
