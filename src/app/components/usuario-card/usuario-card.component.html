@@ -42,56 +42,65 @@
 
         <mat-divider></mat-divider>
 
-        <h3>Dirección</h3>
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h3>Dirección</h3>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                <strong>Calle:</strong>
+                {{ usuario().address.street }}
+            </p>
 
-        <p>
-            <strong>Calle:</strong>
-            {{ usuario().address.street }}
-        </p>
+            <p>
+                <strong>Suite:</strong>
+                {{ usuario().address.suite }}
+            </p>
 
-        <p>
-            <strong>Suite:</strong>
-            {{ usuario().address.suite }}
-        </p>
+            <p>
+                <strong>Ciudad:</strong>
+                {{ usuario().address.city }}
+            </p>
 
-        <p>
-            <strong>Ciudad:</strong>
-            {{ usuario().address.city }}
-        </p>
+            <p>
+                <strong>Código Postal:</strong>
+                {{ usuario().address.zipcode }}
+            </p>
 
-        <p>
-            <strong>Código Postal:</strong>
-            {{ usuario().address.zipcode }}
-        </p>
+            <p>
+                <strong>Latitud:</strong>
+                {{ usuario().address.geo.lat }}
+            </p>
 
-        <p>
-            <strong>Latitud:</strong>
-            {{ usuario().address.geo.lat }}
-        </p>
+            <p>
+                <strong>Longitud:</strong>
+                {{ usuario().address.geo.lng }}
+            </p>
+        </mat-expansion-panel>
 
-        <p>
-            <strong>Longitud:</strong>
-            {{ usuario().address.geo.lng }}
-        </p>
 
-        <mat-divider></mat-divider>
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h3>Empresa</h3>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                <strong>Nombre:</strong>
+                {{ usuario().company.name }}
+            </p>
 
-        <h3>Empresa</h3>
+            <p>
+                <strong>Catch Phrase:</strong>
+                {{ usuario().company.catchPhrase }}
+            </p>
 
-        <p>
-            <strong>Nombre:</strong>
-            {{ usuario().company.name }}
-        </p>
-
-        <p>
-            <strong>Catch Phrase:</strong>
-            {{ usuario().company.catchPhrase }}
-        </p>
-
-        <p>
-            <strong>Business:</strong>
-            {{ usuario().company.bs }}
-        </p>
+            <p>
+                <strong>Business:</strong>
+                {{ usuario().company.bs }}
+            </p>
+        </mat-expansion-panel>
 
     </mat-card-content>
 
