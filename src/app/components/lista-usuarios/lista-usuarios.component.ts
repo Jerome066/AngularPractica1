@@ -7,6 +7,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { TablaUsuariosComponent } from "../tabla-usuarios/tabla-usuarios.component";
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -14,12 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     UsuarioCardComponent,
     FormularioUsuarioComponent,
-
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
-  ],
+    MatIconModule,
+    TablaUsuariosComponent
+],
   templateUrl: './lista-usuarios.component.html',
   styleUrl: './lista-usuarios.component.css'
 })
