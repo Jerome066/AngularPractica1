@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 
@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TablaUsuariosComponent } from "../tabla-usuarios/tabla-usuarios.component";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormControl } from '@angular/forms';
-
+import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator'
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -25,7 +25,8 @@ import { FormControl } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     TablaUsuariosComponent,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatPaginator
   ],
   templateUrl: './lista-usuarios.component.html',
   styleUrl: './lista-usuarios.component.css'
@@ -68,6 +69,11 @@ export class ListaUsuariosComponent implements OnInit {
   //Varaible para el orden alfabetico
   ordenAlf = signal<true | false>(true);
 
+  pageSize = signal(5);
+  pageIndex = signal(0);
+
+  listaPage = this.servicioUsuario.listaUsuarios();
+
   //Lista de usuarios filtrados con el texto de busqueda
   filtroUsuarios = computed(() => {
 
@@ -76,8 +82,6 @@ export class ListaUsuariosComponent implements OnInit {
     var ciudadtxt = this.busquedaCiudad().toLowerCase();
     var empresatxt = this.busquedaEmpresa().toLowerCase();
     var sitiotxt = this.busquedaSitioW().toLowerCase();
-
-    const filtros = [texto, correotxt, ciudadtxt, empresatxt, sitiotxt];
 
     let resultado = this.servicioUsuario.listaUsuarios().filter(usuario => {
       const coincideTexto = !texto ||
@@ -106,6 +110,24 @@ export class ListaUsuariosComponent implements OnInit {
     return resultado;
   });
 
+  usuariosPaginados = computed(() => {
+    const start = this.pageIndex() * this.pageSize();
+    const end = start + this.pageSize();
+    return this.filtroUsuarios().slice(start, end);
+  });
+
+  constructor() {
+    effect(() => {
+      // Se ejecuta cada vez que cambian los filtros
+      this.busquedaF();
+      this.busquedaCorreo();
+      this.busquedaCiudad();
+      this.busquedaEmpresa();
+      this.busquedaSitioW();
+      this.pageIndex.set(0);
+    });
+  }
+
   ngOnInit(): void {
     this.listaUsuarios = this.servicioUsuario.obtenerUsuarios();
   }
@@ -118,12 +140,6 @@ export class ListaUsuariosComponent implements OnInit {
     this.usuarioSeleccionado.set(null);
     this.mostrarFormulario.set(true);
   }
-
-  // actualizarUsuario(usuario: Usuario): void {
-  //   this.usuarioSeleccionado.set(null);
-  //   this.mostrarFormulario.set(false);
-  //   this.servicioUsuario.actualizarUsuario(usuario);
-  // }
 
   editarUsuario(usuario: Usuario): void {
     this.usuarioSeleccionado.set(usuario);
@@ -143,5 +159,11 @@ export class ListaUsuariosComponent implements OnInit {
   // Cambiar orden alfabetico
   cambiarOrdenAlf() {
     this.ordenAlf.update(current => !current)
+  }
+
+
+  onPageChange(event: PageEvent) {
+    this.pageIndex.set(event.pageIndex);
+    this.pageSize.set(event.pageSize);
   }
 }

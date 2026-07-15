@@ -1,5 +1,6 @@
 @if (mostrarFormulario()) {
-<app-formulario-usuario [usuarioEditar]="usuarioSeleccionado()" (guardado)="this.cerrarFormulario()" (cerrar)="cerrarFormulario()"></app-formulario-usuario>
+<app-formulario-usuario [usuarioEditar]="usuarioSeleccionado()" (guardado)="this.cerrarFormulario()"
+    (cerrar)="cerrarFormulario()"></app-formulario-usuario>
 
 }
 
@@ -48,7 +49,7 @@
 
 @if (vista() === 'card') {
 <div class="contenedor-tarjetas">
-    @for (usuario of filtroUsuarios(); track $index) {
+    @for (usuario of usuariosPaginados(); track $index) {
     <app-usuario-card [usuario]="usuario" (editar)="editarUsuario($event)"
         (eliminar)="eliminarUsuario($event)"></app-usuario-card>
     }
@@ -58,6 +59,16 @@
 </div>
 }
 @else {
-<app-tabla-usuarios [listaUsuarios]="filtroUsuarios()" (editar)="editarUsuario($event)"
-    (eliminar)="eliminarUsuario($event)">></app-tabla-usuarios>
+<app-tabla-usuarios [listaUsuarios]="usuariosPaginados()" (editar)="editarUsuario($event)"
+    (eliminar)="eliminarUsuario($event)"></app-tabla-usuarios>
 }
+
+<div>
+    <mat-paginator 
+        [length]="filtroUsuarios().length" 
+        [pageSize]="pageSize()" 
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        [pageIndex]="pageIndex()" 
+        (page)="onPageChange($event)">
+    </mat-paginator>
+</div>
