@@ -17,7 +17,27 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Buscar campo</mat-label>
-        <input matInput #busqueda (input)="busquedaF.set(busqueda.value)" placeholder="Campo">
+        <input matInput #campoNombre (input)="busquedaF.set(campoNombre.value)" placeholder="Campo">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput #campoCorreo (input)="busquedaCorreo.set(campoCorreo.value)" placeholder="Correo">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <input matInput #campoCiudad (input)="busquedaCiudad.set(campoCiudad.value)" placeholder="Ciudad">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Empresa</mat-label>
+        <input matInput #campoEmpresa (input)="busquedaEmpresa.set(campoEmpresa.value)" placeholder="Empresa">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Sitio Web</mat-label>
+        <input matInput #campoSitio (input)="busquedaSitioW.set(campoSitio.value)" placeholder="Sitio web">
     </mat-form-field>
 
     <button mat-raised-button color="primary" (click)="agregarUsuario()">

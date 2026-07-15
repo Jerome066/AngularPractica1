@@ -41,6 +41,18 @@ export class ListaUsuariosComponent implements OnInit {
   //Texto de busqueda para filtrar
   busquedaF = signal("");
 
+  //Texto de busqueda para filtrar
+  busquedaCorreo = signal("");
+
+  //Texto de busqueda para filtrar
+  busquedaCiudad = signal("");
+
+  //Texto de busqueda para filtrar
+  busquedaEmpresa = signal("");
+
+  //Texto de busqueda para filtrar
+  busquedaSitioW = signal("");
+
   //Variable para mostrar o no el formulario
   mostrarFormulario = signal(false);
 
@@ -60,22 +72,36 @@ export class ListaUsuariosComponent implements OnInit {
   filtroUsuarios = computed(() => {
 
     var texto = this.busquedaF().toLowerCase();
-    var resultado = this.servicioUsuario.listaUsuarios().filter(usuario =>
-      usuario.name.toLowerCase().includes(texto) ||
-      usuario.email.toLowerCase().includes(texto) ||
-      usuario.username.toLocaleLowerCase().includes(texto) ||
-      usuario.address.city.toLocaleLowerCase().includes(texto) ||
-      usuario.company.name.toLocaleLowerCase().includes(texto) ||
-      usuario.website.toLocaleLowerCase().includes(texto)
-    );
-    this.ordenAlf()?
-      resultado.sort((a, b) =>
-        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-      )
-      :
-      resultado.sort((a, b) =>
-        b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-      );
+    var correotxt = this.busquedaCorreo().toLowerCase();
+    var ciudadtxt = this.busquedaCiudad().toLowerCase();
+    var empresatxt = this.busquedaEmpresa().toLowerCase();
+    var sitiotxt = this.busquedaSitioW().toLowerCase();
+
+    const filtros = [texto, correotxt, ciudadtxt, empresatxt, sitiotxt];
+
+    let resultado = this.servicioUsuario.listaUsuarios().filter(usuario => {
+      const coincideTexto = !texto ||
+        usuario.name.toLowerCase().includes(texto) ||
+        usuario.username.toLowerCase().includes(texto);
+
+      const coincideCorreo = !correotxt ||
+        usuario.email.toLowerCase().includes(correotxt);
+
+      const coincideCiudad = !ciudadtxt ||
+        usuario.address.city.toLowerCase().includes(ciudadtxt);
+
+      const coincideEmpresa = !empresatxt ||
+        usuario.company.name.toLowerCase().includes(empresatxt);
+
+      const coincideSitio = !sitiotxt ||
+        usuario.website.toLowerCase().includes(sitiotxt);
+
+      return coincideTexto && coincideCorreo && coincideCiudad && coincideEmpresa && coincideSitio;
+    });
+
+    resultado = this.ordenAlf()
+      ? resultado.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+      : resultado.sort((a, b) => b.name.toLowerCase().localeCompare(a.name.toLowerCase()));
 
     return resultado;
   });
@@ -115,7 +141,7 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   // Cambiar orden alfabetico
-  cambiarOrdenAlf(){
+  cambiarOrdenAlf() {
     this.ordenAlf.update(current => !current)
   }
 }
