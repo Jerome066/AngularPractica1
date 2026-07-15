@@ -37,13 +37,18 @@ export class FormularioUsuarioComponent {
 
   usuarioEditar = input<Usuario | null>(null);
   guardado = output<void>();
+  cerrar = output<void>();
 
   usuarioActual: Usuario | null = null;
 
   formulario = this.fb.group({
 
-    name: [''],
-    username: [''],
+    name: ['', [
+      Validators.required
+    ]],
+    username: ['', [
+      Validators.required
+    ]],
     email: [
       '',
       [
@@ -61,15 +66,15 @@ export class FormularioUsuarioComponent {
 
     address: this.fb.group({
 
-      street: ['',[Validators.required]],
-      suite: ['',[Validators.required]],
-      city: ['',[Validators.required]],
-      zipcode: ['',[Validators.required]],
+      street: ['', [Validators.required]],
+      suite: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      zipcode: ['', [Validators.required]],
 
       geo: this.fb.group({
 
-        lat: [0, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)]],
-        lng: [0, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)]]
+        lat: [0, [Validators.pattern(/^-?\d+(\.\d+)?$/)]],
+        lng: [0, [Validators.pattern(/^-?\d+(\.\d+)?$/)]]
 
       })
 
@@ -77,9 +82,9 @@ export class FormularioUsuarioComponent {
 
     company: this.fb.group({
 
-      name: ['',[Validators.required]],
-      catchPhrase: ['',[Validators.required]],
-      bs: ['',[Validators.required]]
+      name: ['', [Validators.required]],
+      catchPhrase: ['', []],
+      bs: ['', []]
 
     })
 
@@ -148,6 +153,10 @@ export class FormularioUsuarioComponent {
 
     this.usuarioActual = null;
     this.guardado.emit();
+  }
+
+  cancelarFormulario():void{
+    this.cerrar.emit();
   }
 
 

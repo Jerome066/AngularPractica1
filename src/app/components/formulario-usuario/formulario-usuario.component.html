@@ -187,9 +187,18 @@
 
             </div>
 
-            <button mat-raised-button color="primary" type="submit">
-                {{ usuarioActual ? 'Actualizar Usuario' : 'Guardar Usuario' }}
-            </button>
+
+            <mat-card-actions align="end">
+
+                <button mat-raised-button color="primary" type="submit">
+                    {{ usuarioActual ? 'Actualizar Usuario' : 'Guardar Usuario' }}
+                </button>
+
+                <button mat-raised-button color="warn" (click)="cancelarFormulario()">
+                    Cancelar
+                </button>
+
+            </mat-card-actions>
 
         </form>
 
