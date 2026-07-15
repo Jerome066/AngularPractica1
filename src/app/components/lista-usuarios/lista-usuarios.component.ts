@@ -119,11 +119,11 @@ export class ListaUsuariosComponent implements OnInit {
     this.mostrarFormulario.set(true);
   }
 
-  actualizarUsuario(usuario: Usuario): void {
-    this.usuarioSeleccionado.set(null);
-    this.mostrarFormulario.set(false);
-    this.servicioUsuario.actualizarUsuario(usuario);
-  }
+  // actualizarUsuario(usuario: Usuario): void {
+  //   this.usuarioSeleccionado.set(null);
+  //   this.mostrarFormulario.set(false);
+  //   this.servicioUsuario.actualizarUsuario(usuario);
+  // }
 
   editarUsuario(usuario: Usuario): void {
     this.usuarioSeleccionado.set(usuario);
@@ -131,8 +131,8 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   cerrarFormulario(): void {
-    this.mostrarFormulario.set(false);
     this.usuarioSeleccionado.set(null);
+    this.mostrarFormulario.set(false);
   }
 
   //Cambio de vista entre tarjetas y tabla

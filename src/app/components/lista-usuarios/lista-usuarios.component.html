@@ -1,5 +1,5 @@
 @if (mostrarFormulario()) {
-<app-formulario-usuario [usuarioEditar]="usuarioSeleccionado()" (guardar)="agregarUsuario()"></app-formulario-usuario>
+<app-formulario-usuario [usuarioEditar]="usuarioSeleccionado()" (guardado)="this.cerrarFormulario()"></app-formulario-usuario>
 
 }
 
