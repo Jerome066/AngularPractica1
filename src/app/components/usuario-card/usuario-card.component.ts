@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import Swal from "sweetalert2";
+
+
 @Component({
   selector: 'app-usuario-card',
   standalone: true,
@@ -28,7 +31,23 @@ export class UsuarioCardComponent {
   readonly panelOpenState = signal(false);
 
   eliminarUsuario(): void {
-    this.eliminar.emit(this.usuario().id);
+
+    Swal.fire({
+      title: "¿Eliminar usuario?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Si",
+      denyButtonText: `No`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Realizado!", "", "success");
+        this.eliminar.emit(this.usuario().id);
+      }
+      else if (result.isDenied) Swal.fire("No se realizó cambios");
+    });
+
+    
   }
 
   actualizarUsuario(): void {
