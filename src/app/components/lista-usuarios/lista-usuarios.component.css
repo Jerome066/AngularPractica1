@@ -7,21 +7,18 @@
 .contenedor-tarjetas {
 
     display: grid;
-
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-
     gap: 24px;
-
-    padding: 30px;
-
+    padding: 40px;
+    padding-left: 150px;
+    padding-right: 150px;
     align-items: start;
-
 }
 
 .barra-acciones {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 16px;
 
     margin: 24px auto;
@@ -31,12 +28,12 @@
     border-radius: 16px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 
-    width: fit-content;
-    max-width: 100%;
+    /* width: fit-content;
+    max-width: 100%; */
 }
 
 .barra-acciones mat-form-field {
-    width: 100px;
+
     height: 70px;
     margin: 0;
 }
@@ -52,13 +49,32 @@
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.barra-acciones button:hover {
-    
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+/* .Orden_button {
+    height: 50px;
+    padding: -5 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 50px;
+    border-radius: 12px;
+} */
+
+.vl {
+    border-left: 3px;
+    height: 60px;
+    box-shadow: -3px 0px 3px 1px rgba(0, 0, 0, 0.30);
 }
 
-.barra-acciones button mat-icon {
-    margin: 0;
+.mat-mdc-form-field {
+    height: 60px !important;
+}
+
+.mat-button-toggle-group,
+.mat-button-toggle-standalone {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    flex: 0 0 120px; /* No crecer, no encoger */
 }
 
 @media (max-width: 768px) {
@@ -76,6 +92,17 @@
     .barra-acciones button {
         width: 100%;
         justify-content: center;
+    }
+
+    .mat-button-toggle-group,
+    .mat-button-toggle-standalone {
+        width: 120px;
+        min-width: 120px;
+        max-width: 120px;
+        align-self: center; /* o flex-start */
+        flex: 0 0 120px;
+        height: 50px !important;
+        min-height: 50px;
     }
 
 }

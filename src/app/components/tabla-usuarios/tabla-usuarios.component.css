@@ -43,5 +43,6 @@ button{
     border: none;
     color:white;
     margin: 5px;
+    border-radius: 12px;
 }
 

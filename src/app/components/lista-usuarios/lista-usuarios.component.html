@@ -7,39 +7,50 @@
 <h2>Lista de usuarios</h2>
 
 <div class="barra-acciones">
-    <button mat-mini-fab aria-label="Example icon button with a menu icon" (click)="cambiarOrdenAlf()">
+    <button mat-raised-button color="primary"  class="Orden_button" (click)="cambiarOrdenAlf()">
         <mat-icon>sort_by_alpha</mat-icon>
+        Orden
     </button>
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [value]="vista()"
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class = "cambioVista"[value]="vista()"
         (change)="cambiarVista($event.value)">
         <mat-button-toggle value="card"><mat-icon>view_comfy</mat-icon></mat-button-toggle>
         <mat-button-toggle value="table"><mat-icon>list</mat-icon></mat-button-toggle>
     </mat-button-toggle-group>
 
+    <div class="vl"></div>
+
     <mat-form-field appearance="outline">
-        <mat-label>Buscar campo</mat-label>
-        <input matInput #campoNombre (input)="busquedaF.set(campoNombre.value)" placeholder="Campo">
+        <mat-label>Buscar Nombre o username</mat-label>
+        <input matInput [value]="busquedaF()" #campoNombre (input)="busquedaF.set(campoNombre.value)" placeholder="Nombre">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
-        <input matInput #campoCorreo (input)="busquedaCorreo.set(campoCorreo.value)" placeholder="Correo">
+        <input matInput [value]="busquedaCorreo()" #campoCorreo (input)="busquedaCorreo.set(campoCorreo.value)" placeholder="Correo">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Ciudad</mat-label>
-        <input matInput #campoCiudad (input)="busquedaCiudad.set(campoCiudad.value)" placeholder="Ciudad">
+        <input matInput [value]="busquedaCiudad()" #campoCiudad (input)="busquedaCiudad.set(campoCiudad.value)" placeholder="Ciudad">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Empresa</mat-label>
-        <input matInput #campoEmpresa (input)="busquedaEmpresa.set(campoEmpresa.value)" placeholder="Empresa">
+        <input matInput [value]="busquedaEmpresa()" #campoEmpresa (input)="busquedaEmpresa.set(campoEmpresa.value)" placeholder="Empresa">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Sitio Web</mat-label>
-        <input matInput #campoSitio (input)="busquedaSitioW.set(campoSitio.value)" placeholder="Sitio web">
+        <input matInput [value]="busquedaSitioW()" #campoSitio (input)="busquedaSitioW.set(campoSitio.value)" placeholder="Sitio web">
     </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="limpiarFiltros()">
+        <mat-icon>settings_backup_restore</mat-icon>
+        Limpiar filtros
+    </button>
+
+    <div class="vl"></div>
 
     <button mat-raised-button color="primary" (click)="agregarUsuario()">
         <mat-icon>person_add</mat-icon>

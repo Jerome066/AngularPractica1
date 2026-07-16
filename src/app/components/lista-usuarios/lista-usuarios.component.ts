@@ -156,12 +156,21 @@ export class ListaUsuariosComponent implements OnInit {
     this.vista.set(valor);
   }
 
+  //Limpieza de filtros
+  limpiarFiltros():void{
+    this.busquedaF.set("");
+    this.busquedaCorreo.set("");
+    this.busquedaCiudad.set("");
+    this.busquedaEmpresa.set("");
+    this.busquedaSitioW.set("");
+  }
+
   // Cambiar orden alfabetico
   cambiarOrdenAlf() {
     this.ordenAlf.update(current => !current)
   }
 
-
+  //Actualización del paginado
   onPageChange(event: PageEvent) {
     this.pageIndex.set(event.pageIndex);
     this.pageSize.set(event.pageSize);
