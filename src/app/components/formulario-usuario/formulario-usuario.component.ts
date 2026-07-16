@@ -65,26 +65,23 @@ export class FormularioUsuarioComponent {
     website: [''],
 
     address: this.fb.group({
-
-      street: ['', [Validators.required]],
-      suite: ['', [Validators.required]],
+      street: ['', []],
+      suite: ['', []],
       city: ['', [Validators.required]],
       zipcode: ['', [Validators.required]],
 
       geo: this.fb.group({
-
-        lat: [0, [Validators.pattern(/^-?\d+(\.\d+)?$/)]],
-        lng: [0, [Validators.pattern(/^-?\d+(\.\d+)?$/)]]
+        lat: [0, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)]],
+        lng: [0, [Validators.required, Validators.pattern(/^-?\d+(\.\d+)?$/)]]
 
       })
 
     }),
 
     company: this.fb.group({
-
       name: ['', [Validators.required]],
-      catchPhrase: ['', []],
-      bs: ['', []]
+      catchPhrase: ['', [Validators.required]],
+      bs: ['', [Validators.required]]
 
     })
 
@@ -155,7 +152,7 @@ export class FormularioUsuarioComponent {
     this.guardado.emit();
   }
 
-  cancelarFormulario():void{
+  cancelarFormulario(): void {
     this.cerrar.emit();
   }
 

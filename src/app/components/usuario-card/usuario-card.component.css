@@ -92,6 +92,27 @@ mat-card-actions button {
     min-width: 110px;
 }
 
+.delete{
+    background-color: #d14d4d;
+    color:white;
+}
+.delete:hover{
+    background-color: #a7002a;
+    cursor: pointer;
+    color:white;
+}
+
+.edit{
+    background-color: #6ac77d;
+    color:white;
+}
+.edit:hover{
+    background-color: #26993d;
+    cursor: pointer;
+    color:white;
+}
+
+
 @media (max-width: 600px) {
 
     .usuario-card {

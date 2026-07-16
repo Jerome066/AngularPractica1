@@ -108,11 +108,12 @@
 
     <mat-card-actions align="end">
 
-        <button mat-raised-button color="primary" (click)="actualizarUsuario()">
+        <button mat-raised-button (click)="actualizarUsuario() " class="edit">
+            <mat-icon>edit</mat-icon>
             Editar
         </button>
-
-        <button mat-raised-button color="warn" (click)="eliminarUsuario()">
+        <button mat-raised-button color="warn" class="delete" (click)="eliminarUsuario()">
+            <mat-icon>delete</mat-icon>
             Eliminar
         </button>
 

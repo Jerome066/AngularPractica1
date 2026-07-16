@@ -34,8 +34,6 @@ mat-form-field{
     width:100%;
 }
 
-/* Secciones */
-
 div[formGroupName="address"],
 div[formGroupName="company"],
 div[formGroupName="geo"]{
