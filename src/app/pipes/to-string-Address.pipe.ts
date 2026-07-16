@@ -7,7 +7,7 @@ import { Address } from '../models/address';
 export class ToStringAddressPipe implements PipeTransform {
 
   transform(_Address: Address): string {
-    const direccion:string = _Address.city + " , " + _Address.street + " , " + _Address.suite + " , " +  _Address.zipcode + " , "  + _Address.geo.lat +","+ _Address.geo.lng;
+    const direccion:string = _Address.city + " , " + _Address.street + " , " + _Address.suite + " , " +  _Address.zipcode;
     return direccion;
   }
 
