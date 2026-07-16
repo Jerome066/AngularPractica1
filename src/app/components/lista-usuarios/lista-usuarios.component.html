@@ -45,14 +45,14 @@
         <input matInput [value]="busquedaSitioW()" #campoSitio (input)="busquedaSitioW.set(campoSitio.value)" placeholder="Sitio web">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="limpiarFiltros()">
+    <button mat-raised-button color="primary" (click)="limpiarFiltros()" class="btn-limpiar">
         <mat-icon>settings_backup_restore</mat-icon>
         Limpiar filtros
     </button>
 
     <div class="vl"></div>
 
-    <button mat-raised-button color="primary" (click)="agregarUsuario()">
+    <button mat-raised-button color="primary" (click)="agregarUsuario()" class="btn-nuevo">
         <mat-icon>person_add</mat-icon>
         Nuevo usuario
     </button>

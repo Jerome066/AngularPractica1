@@ -74,24 +74,27 @@
     width: 120px;
     min-width: 120px;
     max-width: 120px;
-    flex: 0 0 120px; /* No crecer, no encoger */
+    flex: 0 0 120px;
+    /* No crecer, no encoger */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
 
     .barra-acciones {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px;
     }
 
     .barra-acciones mat-form-field {
-        width: 100%;
+        flex: 1 1 280px;
+        min-width: 250px;
+        max-width: 350px;
     }
 
     .barra-acciones button {
-        width: 100%;
-        justify-content: center;
+        flex: 0 0 auto;
     }
 
     .mat-button-toggle-group,
@@ -99,10 +102,76 @@
         width: 120px;
         min-width: 120px;
         max-width: 120px;
-        align-self: center; /* o flex-start */
         flex: 0 0 120px;
-        height: 50px !important;
-        min-height: 50px;
+    }
+
+    .vl {
+        display: none;
+    }
+
+    .contenedor-tarjetas {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .barra-acciones {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Ocultar separadores */
+    .vl {
+        display: none;
+    }
+
+    /* Primera fila */
+    .Orden_button,
+    .cambioVista {
+        flex: 0 0 calc(50% - 6px);
+    }
+
+    .Orden_button {
+        justify-content: center;
+    }
+
+    .cambioVista {
+        display: flex;
+    }
+
+    .cambioVista .mat-button-toggle {
+        flex: 1;
+    }
+
+    /* Todos los filtros ocupan una fila completa */
+    .barra-acciones mat-form-field {
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Botones inferiores */
+    .btn-limpiar,
+    .btn-nuevo {
+        flex: 0 0 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Tarjetas */
+    .contenedor-tarjetas {
+        grid-template-columns: 1fr;
+        padding: 16px;
     }
 
 }
