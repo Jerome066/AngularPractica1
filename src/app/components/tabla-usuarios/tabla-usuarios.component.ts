@@ -4,11 +4,12 @@ import { MatTableModule } from '@angular/material/table';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { ToStringAddressPipe } from "../../pipes/to-string-Address.pipe";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-tabla-usuarios',
   standalone: true,
-  imports: [MatTableModule, ToStringAddressPipe],
+  imports: [MatTableModule, ToStringAddressPipe, MatIcon],
   templateUrl: './tabla-usuarios.component.html',
   styleUrl: './tabla-usuarios.component.css'
 })

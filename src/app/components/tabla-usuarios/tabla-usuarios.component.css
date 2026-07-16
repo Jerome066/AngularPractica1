@@ -1,0 +1,38 @@
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+
+.mat-mdc-table thead,
+.mat-mdc-header-row,
+.mat-mdc-table .mat-mdc-header-cell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1174cf;
+    color: rgb(255, 255, 255);
+}
+
+.delete{
+    background-color: #FF2056;
+}
+
+.edit{
+    background-color: #31C950;
+}
+
+button{
+    border: none;
+    color:white;
+}
+

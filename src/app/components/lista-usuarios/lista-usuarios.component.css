@@ -36,7 +36,8 @@
 }
 
 .barra-acciones mat-form-field {
-    width: 250px;
+    width: 100px;
+    height: 70px;
     margin: 0;
 }
 

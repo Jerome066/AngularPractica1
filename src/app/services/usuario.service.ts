@@ -20,7 +20,6 @@ export class UsuarioService {
 
   obtenerUsuarios(): void {
     this.cargando.set(true);
-    console.log("aqui");
     this.http.get<any[]>(this.api)
       .subscribe({
         next: datos => {
