@@ -15,6 +15,9 @@ import { Usuario } from '../../models/usuario';
 
 import { FormGroupDirective } from '@angular/forms';
 import { viewChild } from '@angular/core';
+import { MatIcon } from "@angular/material/icon";
+
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -24,7 +27,8 @@ import { viewChild } from '@angular/core';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIcon
   ],
   templateUrl: './formulario-usuario.component.html',
   styleUrl: './formulario-usuario.component.css'
@@ -130,30 +134,63 @@ export class FormularioUsuarioComponent {
 
   guardarUsuario(): void {
 
-    if (this.formulario.invalid) {
-      this.formulario.markAllAsTouched();
-      return;
-    }
+    Swal.fire({
+      title: "¿Seguro guardar cambios?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Salvar",
+      denyButtonText: `No salvar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success")
+        if (this.formulario.invalid) {
+          Swal.fire({
+            icon: "error",
+            text: "Error en el formulario"
+          });
+          this.formulario.markAllAsTouched();
+          return;
+        } else {
+          const usuario: Usuario = {
+            id: this.usuarioActual?.id ?? Date.now(),
+            ...this.formulario.getRawValue()
+          } as Usuario;
 
-    const usuario: Usuario = {
-      id: this.usuarioActual?.id ?? Date.now(),
-      ...this.formulario.getRawValue()
-    } as Usuario;
+          if (this.usuarioActual) {
+            this.usuarioService.actualizarUsuario(usuario);
+          } else {
+            this.usuarioService.nuevoUsuario(usuario);
+          }
 
-    if (this.usuarioActual) {
-      this.usuarioService.actualizarUsuario(usuario);
-    } else {
-      this.usuarioService.nuevoUsuario(usuario);
-    }
+          this.formDirective()?.resetForm();
 
-    this.formDirective()?.resetForm();
+          this.usuarioActual = null;
+          this.guardado.emit();
+        }
+      }
+      else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info")
+        this.cancelarFormulario();
+      }
+    });
 
-    this.usuarioActual = null;
-    this.guardado.emit();
+
+
   }
 
   cancelarFormulario(): void {
-    this.cerrar.emit();
+    Swal.fire({
+      title: "¿Cerrar formulario?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Si",
+      denyButtonText: `No`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.cerrar.emit();
+      }
+    });
   }
 
 
