@@ -7,11 +7,12 @@ import { ToStringAddressPipe } from "../../pipes/to-string-Address.pipe";
 import { MatIcon } from "@angular/material/icon";
 
 import {TitleCasePipe } from "@angular/common";
+import { ToStringGeoPipe } from "../../pipes/to-string-geo.pipe";
 
 @Component({
   selector: 'app-tabla-usuarios',
   standalone: true,
-  imports: [MatTableModule, ToStringAddressPipe, MatIcon, TitleCasePipe ],
+  imports: [MatTableModule, ToStringAddressPipe, MatIcon, TitleCasePipe, ToStringGeoPipe],
   templateUrl: './tabla-usuarios.component.html',
   styleUrl: './tabla-usuarios.component.css'
 })
