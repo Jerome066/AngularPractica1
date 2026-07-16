@@ -9,6 +9,8 @@ import { MatIcon } from "@angular/material/icon";
 import {TitleCasePipe } from "@angular/common";
 import { ToStringGeoPipe } from "../../pipes/to-string-geo.pipe";
 
+import Swal from "sweetalert2";
+
 @Component({
   selector: 'app-tabla-usuarios',
   standalone: true,
@@ -24,8 +26,24 @@ export class TablaUsuariosComponent {
   eliminar = output<number>();
 
   eliminarUsuario(id:number): void {
-    this.eliminar.emit(id);
-  }
+  
+      Swal.fire({
+        title: "¿Eliminar usuario?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Si",
+        denyButtonText: `No`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire("Realizado!", "", "success");
+          this.eliminar.emit(id);
+        }
+        else if (result.isDenied) Swal.fire("No se realizó cambios");
+      });
+  
+      
+    }
 
   actualizarUsuario(usuario:Usuario): void {
     this.editar.emit(usuario);
