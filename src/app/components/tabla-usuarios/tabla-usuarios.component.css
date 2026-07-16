@@ -24,15 +24,24 @@ tr:hover {
 }
 
 .delete{
-    background-color: #FF2056;
+    background-color: #db0000;
+}
+.delete:hover{
+    background-color: #a7002a;
+    cursor: pointer;
 }
 
 .edit{
     background-color: #31C950;
 }
+.edit:hover{
+    background-color: #26993d;
+    cursor: pointer;
+}
 
 button{
     border: none;
     color:white;
+    margin: 5px;
 }
 

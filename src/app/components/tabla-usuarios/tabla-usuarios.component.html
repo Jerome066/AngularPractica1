@@ -39,7 +39,7 @@
         <ng-container matColumnDef="company">
             <th mat-header-cell *matHeaderCellDef>Empresa</th>
             <td mat-cell *matCellDef="let usuario">
-                {{ usuario.company.name }}
+                {{ usuario.company.name | titlecase }}
             </td>
         </ng-container>
 

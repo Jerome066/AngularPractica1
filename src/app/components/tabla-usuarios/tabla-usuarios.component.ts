@@ -6,10 +6,12 @@ import { Usuario } from '../../models/usuario';
 import { ToStringAddressPipe } from "../../pipes/to-string-Address.pipe";
 import { MatIcon } from "@angular/material/icon";
 
+import {TitleCasePipe } from "@angular/common";
+
 @Component({
   selector: 'app-tabla-usuarios',
   standalone: true,
-  imports: [MatTableModule, ToStringAddressPipe, MatIcon],
+  imports: [MatTableModule, ToStringAddressPipe, MatIcon, TitleCasePipe ],
   templateUrl: './tabla-usuarios.component.html',
   styleUrl: './tabla-usuarios.component.css'
 })
