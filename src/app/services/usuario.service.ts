@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
-
+import { delay } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,19 +11,21 @@ export class UsuarioService {
   private api = 'https://jsonplaceholder.typicode.com/users';
 
   listaUsuarios = signal<Usuario[]>([]);
-  
+
   cargando = signal(false);
 
-  constructor() { 
+  constructor() {
 
   }
 
   obtenerUsuarios(): void {
     this.cargando.set(true);
-    this.http.get<any[]>(this.api)
+    this.http.get<any[]>(this.api).pipe(
+      delay(30000)
+    )
       .subscribe({
         next: datos => {
-          
+
           const usuarios = datos;
           this.listaUsuarios.set(usuarios);
           this.cargando.set(false);
@@ -41,9 +43,9 @@ export class UsuarioService {
     );
   }
 
-  actualizarUsuario(nuevoUsuario: Usuario): void{
+  actualizarUsuario(nuevoUsuario: Usuario): void {
     this.listaUsuarios.update(usuarios =>
-      usuarios.map( usuario =>
+      usuarios.map(usuario =>
         usuario.id === nuevoUsuario.id
           ? nuevoUsuario
           : usuario
@@ -51,7 +53,7 @@ export class UsuarioService {
     );
   }
 
-  nuevoUsuario(nuevoUsuario: Usuario):void{
+  nuevoUsuario(nuevoUsuario: Usuario): void {
     this.listaUsuarios.update(usuarios => [
       ...usuarios,
       nuevoUsuario
