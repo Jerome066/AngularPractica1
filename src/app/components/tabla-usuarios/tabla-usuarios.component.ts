@@ -6,7 +6,7 @@ import { Usuario } from '../../models/usuario';
 import { ToStringAddressPipe } from "../../pipes/to-string-Address.pipe";
 import { MatIcon } from "@angular/material/icon";
 
-import {TitleCasePipe } from "@angular/common";
+import { TitleCasePipe } from "@angular/common";
 import { ToStringGeoPipe } from "../../pipes/to-string-geo.pipe";
 
 import Swal from "sweetalert2";
@@ -25,27 +25,13 @@ export class TablaUsuariosComponent {
   editar = output<Usuario>();
   eliminar = output<number>();
 
-  eliminarUsuario(id:number): void {
-  
-      Swal.fire({
-        title: "¿Eliminar usuario?",
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: "Si",
-        denyButtonText: `No`
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire("Realizado!", "", "success");
-          this.eliminar.emit(id);
-        }
-        else if (result.isDenied) Swal.fire("No se realizó cambios");
-      });
-  
-      
-    }
+  eliminarUsuario(id: number): void {
 
-  actualizarUsuario(usuario:Usuario): void {
+    Swal.fire("Realizado!", "", "success");
+    this.eliminar.emit(id);
+  }
+
+  actualizarUsuario(usuario: Usuario): void {
     this.editar.emit(usuario);
   }
 
