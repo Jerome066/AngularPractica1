@@ -134,63 +134,38 @@ export class FormularioUsuarioComponent {
 
   guardarUsuario(): void {
 
+    var mensaje = "";
+
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
+
+    const usuario: Usuario = {
+      id: this.usuarioActual?.id ?? Date.now(),
+      ...this.formulario.getRawValue()
+    } as Usuario;
+
+    if (this.usuarioActual) {
+      this.usuarioService.actualizarUsuario(usuario);
+      mensaje = "Cambio realizado";
+    } else {
+      mensaje = "Usuario agregado";
+      this.usuarioService.nuevoUsuario(usuario);
+    }
+
+    this.formDirective()?.resetForm();
+
+    this.usuarioActual = null;
+    this.guardado.emit();
     Swal.fire({
-      title: "¿Seguro guardar cambios?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Salvar",
-      denyButtonText: `No salvar`
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success")
-        if (this.formulario.invalid) {
-          Swal.fire({
-            icon: "error",
-            text: "Error en el formulario"
-          });
-          this.formulario.markAllAsTouched();
-          return;
-        } else {
-          const usuario: Usuario = {
-            id: this.usuarioActual?.id ?? Date.now(),
-            ...this.formulario.getRawValue()
-          } as Usuario;
-
-          if (this.usuarioActual) {
-            this.usuarioService.actualizarUsuario(usuario);
-          } else {
-            this.usuarioService.nuevoUsuario(usuario);
-          }
-
-          this.formDirective()?.resetForm();
-
-          this.usuarioActual = null;
-          this.guardado.emit();
-        }
-      }
-      else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info")
-        this.cancelarFormulario();
-      }
+      title: mensaje,
+      icon: "success"
     });
-
-
-
   }
 
   cancelarFormulario(): void {
-    Swal.fire({
-      title: "¿Cerrar formulario?",
-      showDenyButton: true,
-      showCancelButton: false,
-      confirmButtonText: "Si",
-      denyButtonText: `No`
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        this.cerrar.emit();
-      }
-    });
+    this.cerrar.emit();
   }
 
 
