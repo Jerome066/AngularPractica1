@@ -45,6 +45,9 @@ export class ListaUsuariosComponent implements OnInit {
   busquedaF = signal("");
 
   //Texto de busqueda para filtrar
+  busquedaUserN = signal("");
+
+  //Texto de busqueda para filtrar
   busquedaCorreo = signal("");
 
   //Texto de busqueda para filtrar
@@ -80,6 +83,7 @@ export class ListaUsuariosComponent implements OnInit {
   filtroUsuarios = computed(() => {
 
     var texto = this.busquedaF().toLowerCase();
+    var usernametxt = this.busquedaUserN().toLowerCase();
     var correotxt = this.busquedaCorreo().toLowerCase();
     var ciudadtxt = this.busquedaCiudad().toLowerCase();
     var empresatxt = this.busquedaEmpresa().toLowerCase();
@@ -87,8 +91,10 @@ export class ListaUsuariosComponent implements OnInit {
 
     let resultado = this.servicioUsuario.listaUsuarios().filter(usuario => {
       const coincideTexto = !texto ||
-        usuario.name.toLowerCase().includes(texto) ||
-        usuario.username.toLowerCase().includes(texto);
+        usuario.name.toLowerCase().includes(texto);
+
+      const coincideUserN = !usernametxt ||
+        usuario.username.toLowerCase().includes(usernametxt)
 
       const coincideCorreo = !correotxt ||
         usuario.email.toLowerCase().includes(correotxt);
@@ -102,7 +108,7 @@ export class ListaUsuariosComponent implements OnInit {
       const coincideSitio = !sitiotxt ||
         usuario.website.toLowerCase().includes(sitiotxt);
 
-      return coincideTexto && coincideCorreo && coincideCiudad && coincideEmpresa && coincideSitio;
+      return coincideTexto && coincideUserN && coincideCorreo && coincideCiudad && coincideEmpresa && coincideSitio;
     });
 
     resultado = this.ordenAlf()
