@@ -27,8 +27,21 @@ export class TablaUsuariosComponent {
 
   eliminarUsuario(id: number): void {
 
-    Swal.fire("Realizado!", "", "success");
+    Swal.fire({
+        title: "¿Eliminar usuario?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Si",
+        denyButtonText: `No`
+      }).then((result) => {
+        
+        if (result.isConfirmed) {
+          Swal.fire("Realizado!", "", "success");
     this.eliminar.emit(id);
+        }
+        else if (result.isDenied) Swal.fire("Usuario no eliminado", "", "info");
+      });
+    
   }
 
   actualizarUsuario(usuario: Usuario): void {
