@@ -141,32 +141,49 @@ export class FormularioUsuarioComponent {
       return;
     }
 
-    const usuario: Usuario = {
-      id: this.usuarioActual?.id ?? Date.now(),
-      ...this.formulario.getRawValue()
-    } as Usuario;
-
     if (this.usuarioActual) {
-      this.usuarioService.actualizarUsuario(usuario);
-      mensaje = "Cambio realizado";
+      mensaje = "¿Guardar cambios?";
     } else {
-      mensaje = "Usuario agregado";
-      this.usuarioService.nuevoUsuario(usuario);
+      mensaje = "¿Agregar usuario?";
     }
-
-    this.formDirective()?.resetForm();
-
-    this.usuarioActual = null;
-    this.guardado.emit();
+    
     Swal.fire({
       title: mensaje,
-      icon: "success"
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Guardar",
+      denyButtonText: `No guardar`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Realizado", "", "success");
+        const usuario: Usuario = {
+          id: this.usuarioActual?.id ?? Date.now(),
+          ...this.formulario.getRawValue()
+        } as Usuario;
+
+        if (this.usuarioActual) {
+          this.usuarioService.actualizarUsuario(usuario);
+          mensaje = "Cambio realizado";
+        } else {
+          mensaje = "Usuario agregado";
+          this.usuarioService.nuevoUsuario(usuario);
+        }
+
+        this.formDirective()?.resetForm();
+
+        this.usuarioActual = null;
+        this.guardado.emit();
+      }
+      else if (result.isDenied) Swal.fire("Usuario no guardado", "", "info");
     });
+
+
   }
 
   cancelarFormulario(): void {
     this.cerrar.emit();
   }
-
+ 
 
 }
