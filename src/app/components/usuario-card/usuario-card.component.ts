@@ -31,8 +31,23 @@ export class UsuarioCardComponent {
   readonly panelOpenState = signal(false);
 
   eliminarUsuario(): void {
-    Swal.fire("Realizado!", "", "success");
-    this.eliminar.emit(this.usuario().id);
+
+    Swal.fire({
+      title: "¿Eliminar usuario?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Si",
+      denyButtonText: `No`
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        Swal.fire("Realizado!", "", "success");
+        this.eliminar.emit(this.usuario().id);
+      }
+      else if (result.isDenied) Swal.fire("Usuario no eliminado", "", "info");
+    });
+
+
   }
 
   actualizarUsuario(): void {
