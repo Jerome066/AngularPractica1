@@ -5,6 +5,7 @@ import { Usuario } from '../../models/usuario';
 import { FormularioUsuarioComponent } from '../formulario-usuario/formulario-usuario.component';
 import { UsuarioCardComponent } from '../usuario-card/usuario-card.component';
 
+import { MatProgressBarModule } from '@angular/material/progress-bar'; // barra de progreso
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TablaUsuariosComponent } from "../tabla-usuarios/tabla-usuarios.component";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormControl } from '@angular/forms';
-import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator'
+import { MatPaginator, PageEvent } from '@angular/material/paginator'
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -20,6 +21,7 @@ import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/p
   imports: [
     UsuarioCardComponent,
     FormularioUsuarioComponent,
+    MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -38,7 +40,7 @@ export class ListaUsuariosComponent implements OnInit {
 
   //Lista de usuarios recuperado del servicio
   listaUsuarios = this.servicioUsuario.obtenerUsuarios();
-
+  
   //Texto de busqueda para filtrar
   busquedaF = signal("");
 
