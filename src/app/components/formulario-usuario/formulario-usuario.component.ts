@@ -164,9 +164,7 @@ export class FormularioUsuarioComponent {
 
         if (this.usuarioActual) {
           this.usuarioService.actualizarUsuario(usuario);
-          mensaje = "Cambio realizado";
         } else {
-          mensaje = "Usuario agregado";
           this.usuarioService.nuevoUsuario(usuario);
         }
 
@@ -184,6 +182,5 @@ export class FormularioUsuarioComponent {
   cancelarFormulario(): void {
     this.cerrar.emit();
   }
- 
 
 }
